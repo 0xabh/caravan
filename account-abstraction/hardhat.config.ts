@@ -41,11 +41,11 @@ const config: HardhatUserConfig = {
     },
     networks: {
         polygon: {
-            url: "https://polygon-mainnet.g.alchemy.com/v2/2V1Qd3Tu2iZHc_VZpYeclZNdnuaKDqSw",
+            url: process.env.ALCHEMY_API_URL as string,
             accounts: [process.env.DEPLOYER_PRIVATE_KEY as string]
         },
         mumbai: {
-            url: "https://polygon-mumbai.g.alchemy.com/v2/kREbvoL5IerxCOHupKw6nZcjBVqHvmEy",
+            url: process.env.ALCHEMY_MUMBAI_API_URL as string,
             accounts: [process.env.DEPLOYER_PRIVATE_KEY as string]
         },
         scrollSepolia: {
@@ -58,7 +58,7 @@ const config: HardhatUserConfig = {
         },
         hardhat: {
             forking: {
-                url: 'https://polygon-mumbai.g.alchemy.com/v2/kREbvoL5IerxCOHupKw6nZcjBVqHvmEy'
+                url: process.env.ALCHEMY_API_URL as string
             }
         }
     },
@@ -67,17 +67,17 @@ const config: HardhatUserConfig = {
     },
     etherscan: {
         apiKey: {
-            scrollSepolia: '2VTTTVXZJD7I6HSM2HPQINJQR6VJTDFIJH',
-            // mantleTest: '2VTTTVXZJD7I6HSM2HPQINJQR6VJTDFIJH',
-            // polygonMumbai: "6RVSNVADVHISVKT9EUX37P8YGHWGH3P1DX",
-            // mumbai: "6RVSNVADVHISVKT9EUX37P8YGHWGH3P1DX"
+            scrollSepolia: process.env.SEPOLIA_API_KEY as string,
+            mantleTest: process.env.MANTLE_API_KEY as string,
+            polygonMumbai: process.env.POLYGON_API_KEY as string,
+            mumbai: process.env.POLYGON_API_KEY as string
         },
         customChains: [
             {
                 network: 'scrollSepolia',
                 chainId: 534351,
                 urls: {
-                    apiURL: 'https://sepolia-blockscout.scroll.io/api',
+                    apiURL: 'https://sepolia.scrollscan.dev/api',
                     browserURL: 'https://sepolia-blockscout.scroll.io/',
                 },
             },

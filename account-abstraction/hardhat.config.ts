@@ -48,6 +48,10 @@ const config: HardhatUserConfig = {
             url: process.env.ALCHEMY_MUMBAI_API_URL as string,
             accounts: [process.env.DEPLOYER_PRIVATE_KEY as string]
         },
+        sepolia: {
+            url: process.env.ALCHEMY_SEPOLIA_URL as string,
+            accounts: [process.env.DEPLOYER_PRIVATE_KEY as string]
+        },
         scrollSepolia: {
             url: "https://sepolia-rpc.scroll.io/",
             accounts: [process.env.DEPLOYER_PRIVATE_KEY as string]
@@ -67,10 +71,10 @@ const config: HardhatUserConfig = {
     },
     etherscan: {
         apiKey: {
+            sepolia: process.env.ETHERSCAN_API_KEY as string,
             scrollSepolia: process.env.SEPOLIA_API_KEY as string,
             mantleTest: process.env.MANTLE_API_KEY as string,
             polygonMumbai: process.env.POLYGON_API_KEY as string,
-            mumbai: process.env.POLYGON_API_KEY as string
         },
         customChains: [
             {

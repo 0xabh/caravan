@@ -12,14 +12,24 @@ import {
   getActiveNetwork,
   getSupportedNetworks,
 } from '../../../Background/redux-slices/selectors/networkSelectors';
-import { useBackgroundSelector } from '../../hooks';
+import {useBackgroundDispatch, useBackgroundSelector} from '../../hooks';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useNavigate } from 'react-router-dom';
+import {setActiveNetwork} from "../../../Background/redux-slices/network";
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useBackgroundDispatch();
   const activeNetwork = useBackgroundSelector(getActiveNetwork);
   const supportedNetworks = useBackgroundSelector(getSupportedNetworks);
+
+  const handleChange = (event: any) => {
+    console.log(event.target.value)
+    const newNetwork = supportedNetworks.find(
+        (network) => network.chainID == event.target.value
+    );
+    dispatch(setActiveNetwork(newNetwork));
+  }
 
   return (
     <Box
@@ -59,7 +69,7 @@ const Header = () => {
             id="chain-selector"
             value={activeNetwork.chainID}
             label="Chain"
-            // onChange={handleChange}
+            onChange={handleChange}
           >
             {supportedNetworks.map((network) => (
               <MenuItem key={network.chainID} value={network.chainID}>

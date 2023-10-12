@@ -4,22 +4,25 @@
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
 const hre = require('hardhat')
+const {ethers} = require("ethers");
 
 async function main () {
-  // Hardhat always runs the compile task when running scripts with its command
-  // line interface.
-  //
-  // If this script is run directly using `node` you may want to call compile
-  // manually to make sure everything is compiled
-  // await hre.run('compile');
+    const entryPointAddress = '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789';
 
-  // We get the contract to deploy
-  const Singleton = await hre.ethers.getContractFactory('Singleton')
-  const singleton = await Singleton.deploy()
+// Define the constructor ABI
+    const constructorAbi = [
+        {
+            type: 'address',
+            name: 'entryPointAddress',
+            value: entryPointAddress,
+        },
+    ];
 
-  await singleton.deployed()
-
-  console.log('Singleton deployed to:', singleton.address)
+    const constructorArgs = ethers.utils.defaultAbiCoder.encode(
+        [{name: "entryPointAddress", type: "address"}],
+        [entryPointAddress]
+    );
+    console.log(constructorArgs);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

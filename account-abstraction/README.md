@@ -1,6 +1,6 @@
 # Simple Account Abstraction Contracts
 
-The contracts are inspired [EthInfinitism](https://github.com/eth-infinitism/account-abstraction)
+The contracts are inspired from [EthInfinitism](https://github.com/eth-infinitism/account-abstraction)
 
 ## Simple Account Factory Contract Addresses
 

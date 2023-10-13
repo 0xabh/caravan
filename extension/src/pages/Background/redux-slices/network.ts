@@ -15,7 +15,7 @@ export type NetworkState = {
 
 
 export const initialState: NetworkState = {
-  activeNetwork: Config.network[0],
+  activeNetwork: Config.network[1],
   supportedNetworks: Config.network as Array<EVMNetwork>,
 };
 

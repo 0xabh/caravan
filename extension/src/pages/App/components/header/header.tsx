@@ -16,12 +16,15 @@ import {useBackgroundDispatch, useBackgroundSelector} from '../../hooks';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useNavigate } from 'react-router-dom';
 import {setActiveNetwork} from "../../../Background/redux-slices/network";
+import {getActiveAccount} from "../../../Background/redux-slices/selectors/accountSelectors";
+import {getAccountData} from "../../../Background/redux-slices/account";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useBackgroundDispatch();
   const activeNetwork = useBackgroundSelector(getActiveNetwork);
   const supportedNetworks = useBackgroundSelector(getSupportedNetworks);
+  const activeAccount = useBackgroundSelector(getActiveAccount)
 
   const handleChange = (event: any) => {
     console.log(event.target.value)
@@ -29,6 +32,7 @@ const Header = () => {
         (network) => network.chainID == event.target.value
     );
     dispatch(setActiveNetwork(newNetwork));
+    if(activeAccount) dispatch(getAccountData(activeAccount));
   }
 
   return (

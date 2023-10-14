@@ -38,12 +38,15 @@ const DeployAccount = () => {
   const activeAccount = useBackgroundSelector(getActiveAccount);
   const activeNetwork = useBackgroundSelector(getActiveNetwork);
   const provider = usePublicClient();
+  console.log(provider)
   const accountData = useBackgroundSelector((state) =>
     getAccountEVMData(state, {
       chainId: activeNetwork.chainID,
       address: activeAccount || '',
     })
   );
+
+  console.log(accountData)
 
   const walletDeployed: boolean = useMemo(
     () => (accountData === 'loading' ? false : accountData.accountDeployed),

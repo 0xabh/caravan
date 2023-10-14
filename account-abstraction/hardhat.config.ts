@@ -44,6 +44,10 @@ const config: HardhatUserConfig = {
             url: process.env.ALCHEMY_API_URL as string,
             accounts: [process.env.DEPLOYER_PRIVATE_KEY as string]
         },
+        optimism: {
+          url: process.env.INFURA_RPC_URL as string,
+            accounts: [process.env.DEPLOYER_PRIVATE_KEY as string],
+        },
         mumbai: {
             url: process.env.ALCHEMY_MUMBAI_API_URL as string,
             accounts: [process.env.DEPLOYER_PRIVATE_KEY as string]
@@ -75,6 +79,7 @@ const config: HardhatUserConfig = {
             scrollSepolia: process.env.SEPOLIA_API_KEY as string,
             mantleTest: process.env.MANTLE_API_KEY as string,
             polygonMumbai: process.env.POLYGON_API_KEY as string,
+            optimisim: process.env.OPTIMISM_API_KEY as string
         },
         customChains: [
             {

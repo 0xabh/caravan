@@ -6,7 +6,7 @@ import {
   Select,
   Stack,
 } from '@mui/material';
-import React from 'react';
+import React, {useCallback} from 'react';
 import logo from '../../../../assets/img/logo.svg';
 import {
   getActiveNetwork,
@@ -18,21 +18,31 @@ import { useNavigate } from 'react-router-dom';
 import {setActiveNetwork} from "../../../Background/redux-slices/network";
 import {getActiveAccount} from "../../../Background/redux-slices/selectors/accountSelectors";
 import {getAccountData} from "../../../Background/redux-slices/account";
+import {reinitializeKeyringThunk} from "../../../Background/redux-slices/keyrings";
+import {useNetwork, useSwitchNetwork} from "wagmi";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useBackgroundDispatch();
+  const {chain} = useNetwork()
+  const {chains, error, isLoading, pendingChainId, switchNetwork} = useSwitchNetwork()
   const activeNetwork = useBackgroundSelector(getActiveNetwork);
   const supportedNetworks = useBackgroundSelector(getSupportedNetworks);
   const activeAccount = useBackgroundSelector(getActiveAccount)
+  // console.log("current", chain)
 
-  const handleChange = (event: any) => {
-    console.log(event.target.value)
+  const handleChange = async (event: any) => {
+    // console.log(event.target.value)
     const newNetwork = supportedNetworks.find(
         (network) => network.chainID == event.target.value
     );
-    dispatch(setActiveNetwork(newNetwork));
-    if(activeAccount) dispatch(getAccountData(activeAccount));
+    // console.log(newNetwork)
+    await dispatch(setActiveNetwork(newNetwork));
+    await dispatch(reinitializeKeyringThunk(newNetwork!))
+    if (switchNetwork) {
+      switchNetwork(parseInt(newNetwork!.chainID))
+    }
+    if(activeAccount) await dispatch(getAccountData(activeAccount));
   }
 
   return (

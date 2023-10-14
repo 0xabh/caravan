@@ -126,7 +126,7 @@ export default class ProviderBridgeService extends BaseService<Events> {
   }: ProviderBridgeServiceProps): Promise<ProviderBridgeService> => {
     if (!mainServiceManager)
       throw new Error(
-        'mainServiceManager is needed for Provider Bridge Servie'
+        'mainServiceManager is needed for Provider Bridge Service'
       );
     return new this(mainServiceManager);
   };
@@ -439,7 +439,7 @@ export default class ProviderBridgeService extends BaseService<Events> {
   ): Promise<unknown> {
     const state: RootState =
       this.mainServiceManager.store.getState() as RootState;
-
+    console.log("state.network.activeNetwork.provider",state.network.activeNetwork.provider)
     const provider = new ethers.providers.JsonRpcProvider(
       state.network.activeNetwork.provider
     );

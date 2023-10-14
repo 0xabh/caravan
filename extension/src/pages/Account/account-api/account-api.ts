@@ -86,6 +86,14 @@ class SimpleAccountTrampolineAPI
   ): Promise<UserOperationStruct> => {
     return this.signUserOp(userOp);
   };
+
+  /**
+   * Called after the user swithces networks
+   * @param _provider
+   */
+  switchNetwork = async (_provider: string): Promise<void> => {
+    this.provider = new ethers.providers.JsonRpcProvider(_provider);
+  }
 }
 
 export default SimpleAccountTrampolineAPI;

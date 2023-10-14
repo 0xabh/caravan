@@ -166,10 +166,14 @@ export const sendTransaction = createBackgroundAsyncThunk(
     const keyringService = mainServiceManager.getService(
       KeyringService.name
     ) as KeyringService;
+    console.log("keyringService", keyringService)
 
     const state = mainServiceManager.store.getState() as RootState;
+    console.log("state", state)
     const unsignedUserOp = state.transactions.unsignedUserOperation;
+    console.log("unsignedUserOp", unsignedUserOp)
     const origin = state.transactions.requestOrigin;
+    console.log("origin", origin)
 
     if (unsignedUserOp) {
       const signedUserOp = await keyringService.signUserOpWithContext(
@@ -177,14 +181,16 @@ export const sendTransaction = createBackgroundAsyncThunk(
         unsignedUserOp,
         context
       );
+        console.log("signedUserOp", signedUserOp)
       const txnHash = keyringService.sendUserOp(address, signedUserOp);
+        console.log("txnHash", txnHash)
 
       dispatch(clearTransactionState());
 
       const providerBridgeService = mainServiceManager.getService(
         ProviderBridgeService.name
       ) as ProviderBridgeService;
-
+      console.log("providerBridgeService", providerBridgeService)
       providerBridgeService.resolveRequest(origin || '', txnHash);
     }
   }
@@ -199,6 +205,7 @@ export const createUnsignedUserOp = createBackgroundAsyncThunk(
     const keyringService = mainServiceManager.getService(
       KeyringService.name
     ) as KeyringService;
+    console.log("keyringService", keyringService)
 
     const state = mainServiceManager.store.getState() as RootState;
     const transactionRequest = state.transactions.transactionRequest;

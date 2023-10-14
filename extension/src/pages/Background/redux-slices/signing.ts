@@ -188,25 +188,30 @@ export const getSignedData = createBackgroundAsyncThunk(
     const pendingSigningDataRequest = (
       mainServiceManager.store.getState() as RootState
     ).signing.signDataRequest;
+    console.log("pendingSigningDataRequest", pendingSigningDataRequest)
 
     const keyringService = mainServiceManager.getService(
       KeyringService.name
     ) as KeyringService;
+    console.log("keyringService", keyringService)
 
     const activeAccount = (mainServiceManager.store.getState() as RootState)
       .account.account;
+    console.log("activeAccount", activeAccount)
 
     const signedMessage = await keyringService.personalSign(
       activeAccount || '',
       context,
       pendingSigningDataRequest
     );
+    console.log("signedMessage", signedMessage)
 
     dispatch(signedData(signedMessage));
 
     const providerBridgeService = mainServiceManager.getService(
       ProviderBridgeService.name
     ) as ProviderBridgeService;
+    console.log("providerBridgeService", providerBridgeService)
 
     providerBridgeService.resolveRequest(
       pendingSigningDataRequest?.origin || '',

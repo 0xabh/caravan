@@ -1,4 +1,6 @@
 const querystring = require('querystring');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const logger = (msg) => {
   console.log(`[BGC] ${msg}`);

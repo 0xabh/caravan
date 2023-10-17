@@ -15,11 +15,13 @@ const AccountInfo = ({
   const [tooltipMessage, setTooltipMessage] = useState<string>('Copy address');
 
   const accountInfo = useBackgroundSelector((state) =>
-    getAccountInfo(state, address)
+    getAccountInfo(state, address.account || address)
   );
+  console.log("accountInfo", accountInfo)
+  console.log('address', address)
 
   const copyAddress = useCallback(async () => {
-    await navigator.clipboard.writeText(address);
+    await navigator.clipboard.writeText(address.account || address);
     setTooltipMessage('Address copied');
   }, [address]);
 
@@ -70,8 +72,8 @@ const AccountInfo = ({
               alignItems="center"
             >
               <Typography variant="overline">
-                {address.substring(0, 5)}...
-                {address.substring(address.length - 5)}
+                {(address.account || address).substring(0, 5)}...
+                {(address.account || address).substring((address.account || address).length - 5)}
               </Typography>
               <ContentCopyIcon sx={{ height: 16, cursor: 'pointer' }} />
             </Box>

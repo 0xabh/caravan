@@ -118,11 +118,12 @@ const DeployAccount = () => {
     setDeployLoader(true);
 
     const ethereum = getEthereumGlobal();
-
+    console.log(ethereum)
     try {
       await ethereum.request({
         method: 'eth_requestAccounts',
       });
+      console.log("here")
       await ethereum.request({
         method: 'eth_sendTransaction',
         params: [
@@ -133,7 +134,7 @@ const DeployAccount = () => {
           },
         ],
       });
-
+        console.log("here2")
       setDeployLoader(false);
       alert('success');
       navigate('/');

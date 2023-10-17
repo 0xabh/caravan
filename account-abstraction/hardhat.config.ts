@@ -79,9 +79,17 @@ const config: HardhatUserConfig = {
             scrollSepolia: process.env.SEPOLIA_API_KEY as string,
             mantleTest: process.env.MANTLE_API_KEY as string,
             polygonMumbai: process.env.POLYGON_API_KEY as string,
-            optimisim: process.env.OPTIMISM_API_KEY as string
+            optimism: process.env.OPTIMISM_API_KEY as string
         },
         customChains: [
+            {
+                network: "optimism",
+                chainId: 10,
+                urls: {
+                    apiURL: "https://api-optimistic.etherscan.io/api",
+                    browserURL: "https://optimistic.etherscan.io"
+                }
+            },
             {
                 network: 'scrollSepolia',
                 chainId: 534351,

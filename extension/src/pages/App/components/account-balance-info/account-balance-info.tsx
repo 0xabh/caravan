@@ -18,6 +18,7 @@ const AccountBalanceInfo = ({ address }: { address: string }) => {
   const accountData: AccountData | 'loading' = useBackgroundSelector((state) =>
     getAccountEVMData(state, { address, chainId: activeNetwork.chainID })
   );
+  // console.log("accountData", accountData)
 
   const walletDeployed: boolean = useMemo(
     () => (accountData === 'loading' ? false : accountData.accountDeployed),
@@ -27,7 +28,7 @@ const AccountBalanceInfo = ({ address }: { address: string }) => {
   const backgroundDispatch = useBackgroundDispatch();
 
   useEffect(() => {
-    backgroundDispatch(getAccountData(address));
+    backgroundDispatch(getAccountData(address.account || address));
   }, [backgroundDispatch, address]);
 
   return (

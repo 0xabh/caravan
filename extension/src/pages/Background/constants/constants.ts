@@ -16,4 +16,7 @@ export const EXTERNAL_PORT_NAME = 'aa-extension-external';
 
 export const AA_EXTENSION_CONFIG = 'aa-extension_getConfig';
 
+export const TABLELAND = "mumbai_data_80001_7782"
+export const MUMBAI_RPC = 'https://mumbai.rpc.thirdweb.com'
+
 export { ActiveAccountImplementation, AccountImplementations };

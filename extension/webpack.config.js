@@ -40,7 +40,7 @@ const enableAutoReload = false;
 
 var options = {
   mode: process.env.NODE_ENV || 'development',
-  devtool :'source-map',
+  devtool :'cheap-module-source-map',
   entry: {
     app: path.join(__dirname, 'src', 'pages', 'App', 'index.jsx'),
     options: path.join(__dirname, 'src', 'pages', 'Options', 'index.jsx'),
@@ -61,10 +61,6 @@ var options = {
   },
   module: {
     rules: [
-      {
-        test: /\.wasm$/,
-        type: 'webassembly/experimental',
-      },
       {
         // look for .css or .scss files
         test: /\.(css|scss)$/,

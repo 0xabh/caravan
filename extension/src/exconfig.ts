@@ -2,7 +2,7 @@ import {EVMNetwork} from './pages/Background/types/network';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-    enablePasswordEncryption: false,
+    enablePasswordEncryption: true,
     showTransactionConfirmationScreen: true,
     factory_address: '0x510F02632863035EFaf1AD668798E097FfaE2e8b',
     stateVersion: '0.1',
@@ -20,7 +20,7 @@ export default {
                 decimals: 18,
                 image:
                     'https://icons.llamao.fi/icons/chains/rsz_polygon.jpg',
-            },
+            }
         } satisfies EVMNetwork,
         {
             chainID: '10',
@@ -86,7 +86,7 @@ export default {
             chainID: '5001',
             family: 'EVM',
             name: 'Mantle Testnet',
-            provider: 'https://rpc.testnet.mantle.xyz',
+            provider: 'https://rpc.ankr.com/mantle_testnet',
             entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
             bundler: 'http://localhost:14337/5001',
             baseAsset: {

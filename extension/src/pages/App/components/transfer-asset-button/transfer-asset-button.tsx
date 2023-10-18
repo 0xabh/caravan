@@ -1,35 +1,18 @@
 import React, { useCallback } from 'react';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import StoreIcon from '@mui/icons-material/Store';
-import { Avatar, Stack, Tooltip, Typography, useTheme } from '@mui/material';
+import {Avatar, Modal, Stack, Tooltip, Typography, useTheme} from '@mui/material';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import { useNavigate } from 'react-router-dom';
 import { Wallet, ethers } from 'ethers';
 import { MUMBAI_RPC, TABLELAND } from '../../../Background/constants';
-import { Database } from '@tableland/sdk';
-import env from "../../../../../utils/env.js";
 
 const TransferAssetButton = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-
-  const test = async () => {
-    const res = await fetch("http://localhost:3003/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        sender: "sender",
-        receiver: "receiver", 
-        hash: "hash", 
-        value: "valye", 
-        date: new Date().toISOString(),
-      }),
-    })
-    console.log(res)
-    return 'receipt';
-  };
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <Stack direction={'row'} spacing={4}>
@@ -41,8 +24,17 @@ const TransferAssetButton = () => {
           sx={{ cursor: 'pointer' }}
         >
           <Avatar sx={{ bgcolor: theme.palette.primary.main }}>
-            <StoreIcon onClick={test} />
+            <StoreIcon onClick={handleOpen} />
           </Avatar>
+          <Modal open={false} onClose={handleClose}>
+            <iframe
+                src={`https://buy.onramper.com/?apiKey=pk_prod_01H4N57SYMDD0FMH2H8HQ5JPD3&isAmountEditable=true&isAddressEditable=true&themeName=light&containerColor=ffffffff&primaryColor=ff7a30f2&secondaryColor=ffffff&cardColor=ffe9deff&primaryTextColor=141519&secondaryTextColor=6b6f80&borderRadius=0.32&wgBorderRadius=1`}
+                className="w-full"
+                height="630px"
+                title="Onramper widget"
+                allow="accelerometer; autoplay; camera; gyroscope; payment"
+            />
+          </Modal>
           <Typography variant="button">Buy</Typography>
         </Stack>
       </Tooltip>

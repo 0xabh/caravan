@@ -396,14 +396,21 @@ export default class KeyringService extends BaseService<Events> {
 
   sendUserOp = async (
     address: string,
-    userOp: UserOperationStruct
+    userOp: UserOperationStruct,
+    txnData: EthersTransactionRequest
   ): Promise<string | null> => {
     if (this.bundler) {
       const userOpHash = await this.bundler.sendUserOpToBundler(userOp);
       console.log("userOpHash", userOpHash)
-      const keyring = this.keyrings[address];
-      const receipt = await keyring.getUserOpReceipt(userOpHash);
+      const bundler = new ethers.providers.StaticJsonRpcProvider(this.bundlerUrl)
+      let receipt = null
+      while (receipt === null) {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        receipt = await bundler.send("eth_getUserOperationReceipt", [userOpHash])
+        receipt === null ? console.log("waiting for receipt") : console.log("receipt", receipt)
+      }
       console.log('receipt', receipt);
+      const txHash = receipt.receipt.transactionHash;
       const res = await fetch('http://localhost:3003/', {
         method: 'POST',
         headers: {
@@ -411,15 +418,16 @@ export default class KeyringService extends BaseService<Events> {
         },
         body: JSON.stringify({
           sender: userOp.sender.toString(),
-          receiver: userOp.callData.toString(),
-          hash: userOpHash?.toString(),
-          value: userOp.nonce.toString(),
+          receiver: txnData.to,
+          hash: txHash?.toString(),
+          value: ethers.utils.formatEther(txnData.value ?? 0).toString(),
           date: new Date().toISOString(),
+          chainId: this.bundlerUrl.slice(23).toString()
         }),
       });
       const _receipt = await res.json();
       console.log('receipt', _receipt);
-      return receipt;
+      return txHash;
     }
     return null;
   };

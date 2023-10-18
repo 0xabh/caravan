@@ -25,12 +25,12 @@ console.debug('---- LAUNCHING WITH CONFIG ----', Config);
 export const mantleTestnet = /*#__PURE__*/ defineChain({
     id: 5001,
     name: 'Mantle Testnet',
-    network: 'mantle',
     nativeCurrency: {
         decimals: 18,
         name: 'MNT',
         symbol: 'MNT',
     },
+    network: 'mantle',
     rpcUrls: {
         default: { http: ['https://rpc.testnet.mantle.xyz'] },
         public: { http: ['https://rpc.testnet.mantle.xyz'] },

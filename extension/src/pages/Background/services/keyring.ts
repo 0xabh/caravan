@@ -4,12 +4,11 @@ import MainServiceManager from './main';
 import { ServiceLifecycleEvents } from './types';
 import * as encryptor from '@metamask/browser-passworder';
 import { Provider } from '@ethersproject/providers';
-import { BigNumber, ethers, providers, Wallet } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
 import { AccountApiType } from '../../Account/account-api/types';
 import {
   AccountImplementations,
   ActiveAccountImplementation,
-  TABLELAND,
 } from '../constants';
 import { HttpRpcClient, PaymasterAPI } from '@account-abstraction/sdk';
 import { MessageSigningRequest } from '../redux-slices/signing';
@@ -20,7 +19,6 @@ import { EthersTransactionRequest } from './types';
 import { UserOperationStruct } from '@account-abstraction/contracts';
 import { resolveProperties } from 'ethers/lib/utils.js';
 import 'dotenv/config';
-import { Database } from '@tableland/sdk';
 
 interface Events extends ServiceLifecycleEvents {
   createPassword: string;

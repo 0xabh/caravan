@@ -67,6 +67,11 @@ class SimpleAccountTrampolineAPI
     info: TransactionDetailsForUserOp,
     preTransactionConfirmationContext?: any
   ): Promise<UserOperationStruct> {
+    console.log('createUnsignedUserOpWithContext', info, preTransactionConfirmationContext)
+    console.log(this.provider.getNetwork())
+    const nonce = await this.getNonce()
+    console.log('nonce', nonce)
+    info.nonce = nonce
     return {
       ...(await this.createUnsignedUserOp(info)),
       paymasterAndData: preTransactionConfirmationContext?.paymasterAndData
@@ -92,7 +97,8 @@ class SimpleAccountTrampolineAPI
    * @param _provider
    */
   switchNetwork = async (_provider: string): Promise<void> => {
-    this.provider = new ethers.providers.JsonRpcProvider(_provider);
+    this.provider = new ethers.providers.JsonRpcBatchProvider(_provider);
+    await this.getNonce()
   }
 }
 

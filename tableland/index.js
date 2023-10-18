@@ -8,7 +8,7 @@ const {ethers, Wallet} = require('ethers');
 // Parse JSON request bodies
 app.use(bodyParser.json());
 
-const TABLELAND = "txn_data_80001_7874"
+const TABLELAND = "tx_data_80001_7889"
 const MUMBAI_RPC = 'https://mumbai.rpc.thirdweb.com'
 
 app.get('/', async (req, res) => {
@@ -35,7 +35,11 @@ app.post('/', async (req, res) => {
     ).bind(sender, receiver, value, parseInt(chainId), hash, date)
         .run();
     console.log(insert)
-    await insert.txn?.wait();
+    try {
+        await insert.txn?.wait();
+    } catch (e) {
+        console.log(e)
+    }
     res.json({success: true});
 });
 

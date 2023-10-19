@@ -20,6 +20,7 @@ export type KeyringsState = {
         id: string;
         mnemonic: string[];
     } | null;
+    passwordValidated: number;
 };
 
 export const initialState: KeyringsState = {
@@ -34,6 +35,7 @@ export const initialState: KeyringsState = {
     importing: false,
     status: 'uninitialized',
     keyringToVerify: null,
+    passwordValidated: 0
 };
 
 const keyringsSlice = createSlice({
@@ -64,10 +66,22 @@ const keyringsSlice = createSlice({
                     ? 'locked'
                     : state.status,
         }),
+        correctPassword: (state) => ({
+            ...state,
+            passwordValidated: 1,
+        }),
+        incorrectPassword: (state) => ({
+            ...state,
+            passwordValidated: 2,
+        }),
+        resetPasswordValidation: (state) => ({
+            ...state,
+            passwordValidated: 0,
+        })
     },
 });
 
-export const {keyringLocked, vaultUpdate, keyringUnlocked, reinitializeKeyring} =
+export const {keyringLocked, vaultUpdate, keyringUnlocked, reinitializeKeyring, correctPassword, incorrectPassword, resetPasswordValidation} =
     keyringsSlice.actions;
 export default keyringsSlice.reducer;
 
@@ -84,6 +98,22 @@ export const initializeKeyring = createBackgroundAsyncThunk(
             KeyringService.name
         ) as KeyringService;
         await keyringService.createPassword(password);
+    }
+);
+
+export const validateUser = createBackgroundAsyncThunk(
+    'keyring/validateUser',
+    async (password: string, {dispatch, extra: {mainServiceManager}}) => {
+        const keyringService = mainServiceManager.getService(
+            KeyringService.name
+        ) as KeyringService;
+        const res = keyringService.validatePassword(password);
+        console.log(res)
+        if (res) {
+            dispatch(correctPassword())
+        } else {
+            dispatch(incorrectPassword())
+        }
     }
 );
 

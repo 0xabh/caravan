@@ -36,6 +36,7 @@ const InitializeKeyring = () => {
   const [declaration, setDeclaration] = useState<boolean>(true);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showLoader, setShowLoader] = useState<boolean>(false);
+  const [pinValidationError, setPinValidationError] = useState<string>('');
 
   const backgroundDispatch = useBackgroundDispatch();
 
@@ -57,6 +58,9 @@ const InitializeKeyring = () => {
     if (password !== confirmPassword) {
       setError("Passwords don't match with each other");
       return false;
+    } else if (password.length !== 6 || !/^\d+$/.test(password)) {
+      setError('PIN must be exactly 6 digits long');
+      return false;
     }
     setError('');
     return true;
@@ -69,14 +73,16 @@ const InitializeKeyring = () => {
     // setShowLoader(false);
   }, [validatePassword, backgroundDispatch, password]);
 
+// Add a check to show an error message for PIN validation
   useEffect(() => {
     if (keyringState === 'locked') {
       navigate('/keyring/unlock');
-    }
-    if (keyringState === 'unlocked') {
+    } else if (pinValidationError) {
+      setError(pinValidationError);
+    } else if (keyringState === 'unlocked') {
       navigate((state && state.redirectTo) || '/');
     }
-  }, [keyringState, navigate, state]);
+  }, [keyringState, navigate, state, pinValidationError]);
 
   return Config.enablePasswordEncryption ? (
     <Container sx={{ height: '100vh' }}>
@@ -102,7 +108,7 @@ const InitializeKeyring = () => {
         >
           <CardContent>
             <Typography textAlign="center" variant="h3" gutterBottom>
-              Create password
+              Create 6 digit PIN
             </Typography>
             <Typography
               textAlign="center"

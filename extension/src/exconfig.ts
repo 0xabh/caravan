@@ -56,7 +56,7 @@ export default {
             chainID: '534351',
             family: 'EVM',
             name: 'Scroll',
-            provider: 'https://scroll-sepolia-testnet.rpc.thirdweb.com',
+            provider: 'https://sepolia-rpc.scroll.io',
             entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
             bundler: 'http://localhost:14337/534351',
             baseAsset: {
@@ -86,7 +86,7 @@ export default {
             chainID: '5001',
             family: 'EVM',
             name: 'Mantle Testnet',
-            provider: 'https://rpc.ankr.com/mantle_testnet',
+            provider: 'https://rpc.testnet.mantle.xyz/',
             entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
             bundler: 'http://localhost:14337/5001',
             baseAsset: {

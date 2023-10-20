@@ -2,7 +2,7 @@ import {EVMNetwork} from './pages/Background/types/network';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-    enablePasswordEncryption: true,
+    enablePasswordEncryption: false,
     showTransactionConfirmationScreen: true,
     factory_address: '0x510F02632863035EFaf1AD668798E097FfaE2e8b',
     stateVersion: '0.1',

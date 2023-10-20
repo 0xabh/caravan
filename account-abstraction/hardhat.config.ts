@@ -78,7 +78,8 @@ const config: HardhatUserConfig = {
             sepolia: process.env.ETHERSCAN_API_KEY as string,
             scrollSepolia: process.env.SEPOLIA_API_KEY as string,
             mantleTest: process.env.MANTLE_API_KEY as string,
-            polygonMumbai: process.env.POLYGON_API_KEY as string,
+            polygonMumbai: process.env.POLYGONSCAN_API_KEY as string,
+            // polygon: process.env.POLYGONSCAN_API_KEY as string,
             optimism: process.env.OPTIMISM_API_KEY as string
         },
         customChains: [
@@ -94,7 +95,7 @@ const config: HardhatUserConfig = {
                 network: 'scrollSepolia',
                 chainId: 534351,
                 urls: {
-                    apiURL: 'https://sepolia.scrollscan.dev/api',
+                    apiURL: 'https://sepolia-blockscout.scroll.io/api\?',
                     browserURL: 'https://sepolia-blockscout.scroll.io/',
                 },
             },

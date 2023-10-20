@@ -430,7 +430,7 @@ export default class KeyringService extends BaseService<Events> {
                     hash: txHash?.toString(),
                     value: ethers.utils.formatEther(txnData.value ?? 0).toString(),
                     date: new Date().toISOString(),
-                    chainId: this.bundlerUrl.slice(23).toString()
+                    chainId: this.bundlerUrl.slice(25).toString()
                 }),
             });
             const _receipt = await res.json();

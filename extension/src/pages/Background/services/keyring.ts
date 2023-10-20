@@ -134,7 +134,7 @@ export default class KeyringService extends BaseService<Events> {
         return this.keyrings;
     }
 
-    reinitialize = async (_provider: string, bundlerUrl: string) => {
+    reinitialize = async (_provider: string, bundlerUrl: string, signer: ethers.Signer) => {
         // console.log('reinitialize', _provider, bundlerUrl);
         this.provider = new ethers.providers.JsonRpcBatchProvider(_provider);
         this.bundlerUrl = bundlerUrl;
@@ -143,7 +143,7 @@ export default class KeyringService extends BaseService<Events> {
         const address = Object.keys(this.keyrings)[0];
         const keyring = this.keyrings[address];
         // console.log("keyring", keyring)
-        await keyring.switchNetwork(_provider);
+        await keyring.switchNetwork(_provider, signer);
 
         // console.log("reinit", this.keyrings)
         return this.keyrings;
@@ -277,6 +277,7 @@ export default class KeyringService extends BaseService<Events> {
 
     addAccount = async (
         implementation: string,
+        signer: ethers.Signer,
         context?: any
     ): Promise<string> => {
         // console.log("addAccount", implementation, context, this.provider, this.bundler)
@@ -287,7 +288,9 @@ export default class KeyringService extends BaseService<Events> {
             context,
             paymasterAPI: this.paymasterAPI,
         });
-        await account.init();
+        console.log("addAccount - signer", signer)
+        // await account.init();
+        await account.reinitialize(signer);
         const address = await account.getAccountAddress();
         if (address === ethers.constants.AddressZero)
             throw new Error(

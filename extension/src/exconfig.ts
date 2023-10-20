@@ -2,7 +2,7 @@ import {EVMNetwork} from './pages/Background/types/network';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-    enablePasswordEncryption: true,
+    enablePasswordEncryption: false,
     showTransactionConfirmationScreen: true,
     factory_address: '0x510F02632863035EFaf1AD668798E097FfaE2e8b',
     stateVersion: '0.1',
@@ -56,7 +56,7 @@ export default {
             chainID: '534351',
             family: 'EVM',
             name: 'Scroll',
-            provider: 'https://sepolia-rpc.scroll.io',
+            provider: 'https://scroll-sepolia-testnet.rpc.thirdweb.com',
             entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
             bundler: 'http://localhost:14337/534351',
             baseAsset: {

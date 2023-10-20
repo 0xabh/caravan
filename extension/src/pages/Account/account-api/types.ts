@@ -6,6 +6,8 @@ import {
 import {TransactionDetailsForUserOp} from '@account-abstraction/sdk/dist/src/TransactionDetailsForUserOp';
 import {MessageSigningRequest} from '../../Background/redux-slices/signing';
 import {HttpRpcClient} from '@account-abstraction/sdk';
+import { Magic } from 'magic-sdk';
+import { ethers } from 'ethers';
 
 export abstract class AccountApiType extends BaseAccountAPI {
     abstract serialize: () => Promise<object>;
@@ -28,7 +30,10 @@ export abstract class AccountApiType extends BaseAccountAPI {
 
     abstract switchNetwork(
         _provider: string,
-    ): Promise<void>
+        signer: ethers.Signer
+    ): Promise<void>;
+
+    abstract reinitialize(signer: ethers.Signer): Promise<this>;
 }
 
 export interface AccountApiParamsType<T, S> extends BaseApiParams {

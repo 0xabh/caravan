@@ -1,4 +1,5 @@
 import Onboarding from '../../Account/components/onboarding';
+import { Password } from '../../Account/components/password';
 import {
   PreTransactionConfirmation,
   TransactionConfirmation,
@@ -10,6 +11,7 @@ import { ActiveAccountImplementation } from '../../Account';
 
 const AccountImplementation: AccountImplementationComponentsType = {
   Onboarding,
+  Password,
   Transaction: {
     PreTransactionConfirmation,
     TransactionConfirmation,

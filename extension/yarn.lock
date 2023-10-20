@@ -2109,24 +2109,24 @@
   dependencies:
     "@lit-labs/ssr-dom-shim" "^1.0.0"
 
-"@magic-sdk/commons@^9.6.2":
-  version "9.6.2"
-  resolved "https://registry.yarnpkg.com/@magic-sdk/commons/-/commons-9.6.2.tgz#db03f98efb771481f4045a3877b6285600f0e96e"
-  integrity sha512-PgYznuO9GV5wiKgzP3bEQJTnAbvfHmAPTBmwbP/ESag3FrOyXxuk7PIWpeGmnFa/i6SSQUsmKp8sr/BN0dU5vg==
+"@magic-sdk/commons@^13.4.0":
+  version "13.4.0"
+  resolved "https://registry.yarnpkg.com/@magic-sdk/commons/-/commons-13.4.0.tgz#6217fd8e7346f5029c7c584d98578c36d26ec3db"
+  integrity sha512-F6XG0r0XEZmGB8OTPNFrRz6IgDhb39YxUrG2n/4hajb0vJuA28QjoexG/d7f6Rklvxq9oIBR1wMuqUzGs3oSnA==
 
-"@magic-sdk/provider@^13.6.2":
-  version "13.6.2"
-  resolved "https://registry.yarnpkg.com/@magic-sdk/provider/-/provider-13.6.2.tgz#ae0772205952f65b32466396c81bfd695d23554f"
-  integrity sha512-ecrTyL4NaploZ/cX1b+NGiWYMSAWVseE7xa7tvmkejZgQCrcJQd8UXb3LPVPmF7kQPKGutJSdkeGJCDKwsGKIA==
+"@magic-sdk/provider@^17.4.0":
+  version "17.4.0"
+  resolved "https://registry.yarnpkg.com/@magic-sdk/provider/-/provider-17.4.0.tgz#f22174899f36664fcebd47781b3c497479abe671"
+  integrity sha512-DvroR5qCumGtS8TY8wr/4bI9bvkUD222ghbNTsu9MFAgybksc6/ARUX8ttjFZVQXMIIe07PpZroxnxI+ih5mlA==
   dependencies:
-    "@magic-sdk/types" "^11.6.2"
+    "@magic-sdk/types" "^15.4.0"
     eventemitter3 "^4.0.4"
     web3-core "1.5.2"
 
-"@magic-sdk/types@^11.6.2":
-  version "11.6.2"
-  resolved "https://registry.yarnpkg.com/@magic-sdk/types/-/types-11.6.2.tgz#1fb6205b516c3f0c5787e82aecd0e667d2de1cd2"
-  integrity sha512-+Emd+9HeeVi2E0bktJ33YleA/ozEuKYCBfmSbGRxlntdyUvaojeC+WPf2jN1WH8FjUEiljAjrEJTTZyRGCL8SQ==
+"@magic-sdk/types@^15.4.0":
+  version "15.8.0"
+  resolved "https://registry.yarnpkg.com/@magic-sdk/types/-/types-15.8.0.tgz#d54dc8221bb0f69c74ff96d486535ce150c2c04b"
+  integrity sha512-xLQsBAg2JXUn39dRfZW6Z3LUT50qz/3pg6R658oVBr4LbJd/L8iAR0zCRmjLLNXzfYm1RkJYZWuHaxjJgKlkSA==
 
 "@mapbox/node-pre-gyp@^1.0.0":
   version "1.0.11"
@@ -10539,14 +10539,14 @@ lru_map@^0.3.3:
   resolved "https://registry.yarnpkg.com/lru_map/-/lru_map-0.3.3.tgz#b5c8351b9464cbd750335a79650a0ec0e56118dd"
   integrity sha512-Pn9cox5CsMYngeDbmChANltQl+5pi6XmTrraMSzhPmMBbmgcxmqWry0U3PGapCU1yB4/LqCcom7qhHZiF/jGfQ==
 
-magic-sdk@^13.4.0:
-  version "13.6.2"
-  resolved "https://registry.yarnpkg.com/magic-sdk/-/magic-sdk-13.6.2.tgz#68766fd9d1805332d2a00e5da1bd30fce251a6ac"
-  integrity sha512-ZjIZM2gqaxxOR+ZAyKVw50akjfdyo0q5hZzrCMiqyCqh4BXulU7yqHgUa/5/nJ+0/4xBgUejoOcDEm+UdmzLjA==
+magic-sdk@^17.3.0:
+  version "17.4.0"
+  resolved "https://registry.yarnpkg.com/magic-sdk/-/magic-sdk-17.4.0.tgz#ed5a71c1308b484b2e7615eb39d10194907ac6ed"
+  integrity sha512-oIsj0D01pSDhiuscZ4KCUcT07pWlg2+wsqZHzs5IAYbd1d4PM6+ZvYjTeob9W0Cl5FB8NNE0W8GUumvTd4fqqA==
   dependencies:
-    "@magic-sdk/commons" "^9.6.2"
-    "@magic-sdk/provider" "^13.6.2"
-    "@magic-sdk/types" "^11.6.2"
+    "@magic-sdk/commons" "^13.4.0"
+    "@magic-sdk/provider" "^17.4.0"
+    "@magic-sdk/types" "^15.4.0"
     localforage "^1.7.4"
 
 make-dir@^3.1.0:

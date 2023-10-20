@@ -5,6 +5,7 @@ import { ethers } from 'ethers';
 // The EVM (Ethereum Virtual Machine) class extends the abstract MagicNetwork class
 export class EVM extends MagicNetwork {
   provider?: ethers.providers.Provider;
+  public signer?: ethers.Signer | undefined;
 
   // The network for this class instance
   public network: Network;
@@ -21,7 +22,7 @@ export class EVM extends MagicNetwork {
 
   // Asynchronous method to initialize the Web3 instance
   async initializeWeb3(): Promise<void> {
-    const provider = await this.magic?.wallet.getProvider(); // Get the provider from the magic
+    const provider = this.magic?.rpcProvider; // Get the provider from the magic
     const magicProvider = new ethers.providers.Web3Provider(provider); // Initializing the Web3 instance
     this.provider = magicProvider;
     const signer = magicProvider.getSigner(); // Get the signer from the provider

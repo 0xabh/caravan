@@ -14,7 +14,11 @@
     "resolveJsonModule": true,
     "noEmit": false,
     "jsx": "react",
-    "typeRoots": ["./src/types"]
+    "typeRoots": ["./src/types"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": ["src", "deploy"],
   "exclude": ["build", "node_modules", "dist"],

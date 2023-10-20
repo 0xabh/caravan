@@ -33,12 +33,14 @@ export abstract class MagicNetwork {
 
   // Method to login with OTP using Magic SDK
   public async loginWithOTP(email: string): Promise<void> {
-    console.log(this.magic)
+    console.log(this.magic);
     await this.magic?.auth.loginWithEmailOTP({ email });
     const loggedIn = await this.magic?.user.isLoggedIn();
-    console.log(loggedIn, this.magic?.rpcProvider)
-    const signer = new ethers.providers.Web3Provider(this.magic?.rpcProvider!).getSigner();
-    console.log("signer", signer)
+    console.log(loggedIn, this.magic?.rpcProvider);
+    const signer = new ethers.providers.Web3Provider(
+      this.magic?.rpcProvider!
+    ).getSigner();
+    console.log('signer', signer);
     this.setSigner(signer);
   }
 

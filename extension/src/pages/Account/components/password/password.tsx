@@ -170,7 +170,7 @@ const Password: OnboardingComponent = ({
                     onChange={(e, checked) => setDeclaration(checked)}
                   />{' '}
                   <Typography variant="body2" color="text.secondary">
-                    I understand that TRAMPOLINE Account cannot recover this
+                    I understand that CARAVAN cannot recover this
                     password for me
                   </Typography>
                 </Stack>

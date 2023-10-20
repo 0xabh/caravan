@@ -89,11 +89,26 @@ const TransferAssetButton = () => {
           justifyContent="center"
           alignItems="center"
           spacing={'4px'}
-          sx={{ cursor: 'not-allowed', opacity: 0.5 }}
+          sx={{ cursor: 'pointer', opacity: 0.5 }}
         >
           <Avatar sx={{ bgcolor: theme.palette.primary.main }}>
             <SwapHorizIcon />
           </Avatar>
+          {/* <Modal open={open} onClose={handleClose} style={modalStyle}>
+            <div
+              style={{
+                backgroundColor: 'white',
+                padding: '20px',
+                borderRadius: '10px',
+                position: 'relative',
+              }}
+            >
+              <IconButton onClick={handleClose} sx={closeButtonStyle}>
+                <CloseIcon />
+              </IconButton>
+              <SwapWidget />
+            </div>
+          </Modal> */}
           <Typography variant="button">Swap</Typography>
         </Stack>
       </Tooltip>

@@ -7,7 +7,7 @@ import {
   Stack,
 } from '@mui/material';
 import React, { useCallback, useEffect } from 'react';
-import logo from '../../../../assets/img/logo.svg';
+import logo from '../../../../assets/img/caravanLogo.png';
 import {
   getActiveNetwork,
   getSupportedNetworks,
@@ -138,7 +138,7 @@ const Header = () => {
         sx={{ cursor: 'pointer' }}
         onClick={() => navigate('/')}
       >
-        <img height={30} src={logo} className="App-logo" alt="logo" />
+        <img height={60} width={60} src={logo} className="App-logo" alt="logo" />
       </Stack>
       <Stack
         direction="row"

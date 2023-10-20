@@ -1,8 +1,8 @@
-import { BigNumberish } from "ethers";
+import { BigNumberish } from 'ethers';
 
 /**
  * Gets the ethereum global in a convenient way.
- * 
+ *
  * It does two important things:
  * - Throws an exception if window.ethereum is missing so that we can return a
  *   non-optional `ethereum` value.
@@ -33,4 +33,11 @@ export default function getEthereumGlobal() {
   };
 
   return ethereum;
+}
+
+export function getEthereumGlobalProvider() {
+  if (typeof window.ethereum === 'undefined') {
+    throw new Error('window.ethereum is missing');
+  }
+  return new Web3Provider(window.ethereum);
 }

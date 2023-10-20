@@ -16,7 +16,7 @@ const ASSET_PATH = process.env.ASSET_PATH || '/';
 var alias = {};
 
 // load the secrets
-var secretsPath = path.join(__dirname, 'secrets.' + env.NODE_ENV + '.js');
+var secretsPath = path.join(__dirname, 'secrets.' + 'development' + '.js');
 
 var fileExtensions = [
   'jpg',
@@ -152,7 +152,7 @@ var options = {
     new webpack.ProgressPlugin(),
     // expose and write the allowed env vars on the compiled bundle
     new webpack.EnvironmentPlugin({
-      NODE_ENV: process.env.NODE_ENV,
+      NODE_ENV: 'development',
     }),
     new CopyWebpackPlugin({
       patterns: [
@@ -233,7 +233,7 @@ var options = {
   },
 };
 
-if (env.NODE_ENV === 'development') {
+if ('development'=== 'development') {
   options.devtool = 'cheap-module-source-map';
 } else {
   options.optimization = {

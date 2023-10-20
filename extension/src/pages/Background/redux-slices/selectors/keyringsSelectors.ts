@@ -17,6 +17,11 @@ export const selectKeyringStatus = createSelector(
   (keyrings) => (keyrings as KeyringsState).status
 );
 
+export const selectKeyringPasswordValidated = createSelector(
+    selectKeyrings,
+    (keyrings) => (keyrings as KeyringsState).passwordValidated
+);
+
 export const selectKeyringVault = createSelector(
   selectKeyrings,
   (keyrings) => (keyrings as KeyringsState).vault

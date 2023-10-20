@@ -21,11 +21,14 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { initializeKeyring } from '../../../Background/redux-slices/keyrings';
 import { selectKeyringStatus } from '../../../Background/redux-slices/selectors/keyringsSelectors';
-import { useBackgroundDispatch, useBackgroundSelector } from '../../hooks';
 import Config from '../../../../exconfig';
-import PrimaryButton from '../../../Account/components/PrimaryButton';
+import PrimaryButton from '../PrimaryButton';
+import { useBackgroundDispatch, useBackgroundSelector } from '../../../App/hooks';
+import { OnboardingComponent, OnboardingComponentProps } from '../types';
 
-const InitializeKeyring = () => {
+const Password: OnboardingComponent = ({
+  onOnboardingComplete
+}: OnboardingComponentProps) => {
   const keyringState = useBackgroundSelector(selectKeyringStatus);
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -40,12 +43,12 @@ const InitializeKeyring = () => {
 
   const backgroundDispatch = useBackgroundDispatch();
 
-  useEffect(() => {
-    if (Config.enablePasswordEncryption === false) {
-      setShowLoader(true);
-      backgroundDispatch(initializeKeyring('12345'));
-    }
-  }, [backgroundDispatch, setShowLoader]);
+  // useEffect(() => {
+  //   if (Config.enablePasswordEncryption === false) {
+  //     setShowLoader(true);
+  //     backgroundDispatch(initializeKeyring('12345'));
+  //   }
+  // }, [backgroundDispatch, setShowLoader]);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (
@@ -70,21 +73,13 @@ const InitializeKeyring = () => {
     if (!validatePassword()) return;
     setShowLoader(true);
     backgroundDispatch(initializeKeyring(password));
-    // setShowLoader(false);
+    onOnboardingComplete()
+    setShowLoader(false);
   }, [validatePassword, backgroundDispatch, password]);
 
-// Add a check to show an error message for PIN validation
-  useEffect(() => {
-    if (keyringState === 'locked') {
-      navigate('/keyring/unlock');
-    } else if (pinValidationError) {
-      setError(pinValidationError);
-    } else if (keyringState === 'unlocked') {
-      navigate((state && state.redirectTo) || '/');
-    }
-  }, [keyringState, navigate, state, pinValidationError]);
 
-  return Config.enablePasswordEncryption ? (
+
+  return (
     <Container sx={{ height: '100vh' }}>
       <Stack
         spacing={2}
@@ -216,7 +211,7 @@ const InitializeKeyring = () => {
         </Box>
       </Stack>
     </Container>
-  ) : null;
+  )
 };
 
-export default InitializeKeyring;
+export default Password;

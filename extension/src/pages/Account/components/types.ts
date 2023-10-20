@@ -2,12 +2,18 @@ import { UserOperationStruct } from '@account-abstraction/contracts';
 import { EthersTransactionRequest } from '../../Background/services/types';
 
 export interface OnboardingComponentProps {
-  accountName: string;
   onOnboardingComplete: (context?: any) => void;
+}
+
+export interface EmailComponentProps {
+  accountName: string;
+  nextStage: (context?: any) => void;
 }
 
 export interface OnboardingComponent
   extends React.FC<OnboardingComponentProps> {}
+
+export interface EmailComponent extends React.FC<EmailComponentProps> {}
 
 export interface TransactionComponentProps {
   transaction: EthersTransactionRequest;
@@ -60,7 +66,8 @@ export interface SignMessageComponenet
   extends React.FC<SignMessageComponenetProps> {}
 
 export interface AccountImplementationComponentsType {
-  Onboarding?: OnboardingComponent;
+  Onboarding?: EmailComponent;
+  Password?: OnboardingComponent;
   Transaction?: TransactionComponent;
   SignMessage?: SignMessageComponenet;
 }

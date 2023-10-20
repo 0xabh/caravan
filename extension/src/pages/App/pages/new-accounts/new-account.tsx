@@ -24,6 +24,7 @@ import { useNavigate } from 'react-router-dom';
 import { getAccountAdded } from '../../../Background/redux-slices/selectors/accountSelectors';
 import { resetAccountAdded } from '../../../Background/redux-slices/account';
 import PrimaryButton from '../../../Account/components/PrimaryButton';
+import { useNetworkContext } from '../../../../context/NetworkContext';
 
 const TakeNameComponent = ({
   name,
@@ -92,13 +93,14 @@ const TakeNameComponent = ({
 
 const AccountOnboarding =
   AccountImplementations[ActiveAccountImplementation].Onboarding;
+const Password = AccountImplementations[ActiveAccountImplementation].Password;
 
 const NewAccount = () => {
-  const [stage, setStage] = useState<'name' | 'account-onboarding'>('name');
+  const [stage, setStage] = useState<'name' | 'password' | 'account-onboarding'>('name');
   const [name, setName] = useState<string>('');
   const [showLoader, setShowLoader] = useState<boolean>(false);
   const navigate = useNavigate();
-
+  const {network, magicNetwork} = useNetworkContext()
   const backgroundDispatch = useBackgroundDispatch();
 
   const supportedNetworks: Array<EVMNetwork> =
@@ -116,12 +118,14 @@ const NewAccount = () => {
   const onOnboardingComplete = useCallback(
     async (context?: any) => {
       setShowLoader(true);
+      console.log("signer", magicNetwork?.getSigner()!)
       await backgroundDispatch(
         createNewAccount({
           name: name,
           chainIds: supportedNetworks.map((network) => network.chainID),
           implementation: ActiveAccountImplementation,
           context,
+          email: (await magicNetwork?.getInfo())?.email!
         })
       );
       setShowLoader(false);
@@ -134,7 +138,10 @@ const NewAccount = () => {
     if (stage === 'name' && AccountOnboarding) {
       setStage('account-onboarding');
     }
-    if (stage === 'name' && !AccountOnboarding) {
+    if (stage === 'account-onboarding' && Password) {
+      setStage('password');
+    }
+    if (stage === 'password' && !Password) {
       onOnboardingComplete();
     }
     setShowLoader(false);
@@ -187,9 +194,13 @@ const NewAccount = () => {
             AccountOnboarding && (
               <AccountOnboarding
                 accountName={name}
-                onOnboardingComplete={onOnboardingComplete}
+                nextStage={nextStage}
               />
             )}
+          {!showLoader && stage === 'password' && Password && (
+            <Password onOnboardingComplete={onOnboardingComplete}
+             />
+          )}
         </Box>
       </Stack>
     </Container>

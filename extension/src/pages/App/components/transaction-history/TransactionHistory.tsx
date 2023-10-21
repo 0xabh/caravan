@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useBackgroundSelector } from '../../hooks';
 import { getActiveAccount } from '../../../Background/redux-slices/selectors/accountSelectors';
 import { getActiveNetwork } from '../../../Background/redux-slices/selectors/networkSelectors';
-import { Card, CardContent, Link } from '@mui/material';
+import { Card, CardContent, Link, Typography } from '@mui/material';
 
 const getExplorerLink = (chainId: number) => {
   let link = '';
@@ -62,34 +62,36 @@ export const TransactionHistory = () => {
 
   return (
     <div>
-      <h1>Transaction History</h1>
-      {data?.length === 0 && <p>No transactions yet</p>}
+      {/* <Typography variant='h6'>Transaction History</Typography> */}
+      {data?.length === 0 && <Typography variant="h6" sx={{padding: "2px 3px"}}>No transactions yet</Typography>}
       {data && (
         <div>
           {data.reverse().map((txn, index) => {
             return (
-              <Card key={index} sx={{margin: "4px auto"}}>
+              <Card key={index} sx={{ margin: '4px auto' }}>
                 <CardContent>
-                  <p>
+                  <Typography variant="subtitle1" gutterBottom>
                     Receiver:{' '}
                     <Link
                       href={`${exploereLink}address/${txn.receiver}`}
                       target="_blank"
                       rel="noopener"
-                    >{`${txn.receiver.slice(0, 4)}...${txn.receiver.slice(
-                      -4
-                    )}`}</Link>
-                  </p>
-                  <p>Value: {txn.value}</p>
-                  <p>
+                    >{`${txn.receiver.slice(0, 4)}...${txn.receiver.slice(-4)}`}</Link>
+                  </Typography>
+                  <Typography sx={{fontSize: "13px"}} variant="body2" color="textSecondary">
+                    Value: {txn.value} {activeNetwork.baseAsset.symbol}
+                  </Typography>
+                  <Typography sx={{fontSize: "13px"}} variant="body2" color="textSecondary">
                     Hash:{' '}
                     <Link
                       href={`${exploereLink}tx/${txn.hash}`}
                       target="_blank"
                       rel="noopener"
                     >{`${txn.hash.slice(0, 4)}...${txn.hash.slice(-4)}`}</Link>
-                  </p>
-                  <p>Date: {new Date(txn.date).toLocaleString()}</p>
+                  </Typography>
+                  <Typography sx={{fontSize: "13px"}} variant="body2" color="textSecondary">
+                    Date: {new Date(txn.date).toLocaleString()}
+                  </Typography>
                 </CardContent>
               </Card>
             );

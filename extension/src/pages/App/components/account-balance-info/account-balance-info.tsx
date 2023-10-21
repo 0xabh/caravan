@@ -28,13 +28,14 @@ const AccountBalanceInfo = ({ address }: { address: string }) => {
   const backgroundDispatch = useBackgroundDispatch();
 
   useEffect(() => {
-    backgroundDispatch(getAccountData(address.account || address));
+    backgroundDispatch(getAccountData(address));
   }, [backgroundDispatch, address]);
 
   return (
     <Stack spacing={1} justifyContent="center" alignItems="center">
       {activeNetwork.baseAsset.image && (
         <img
+          style={{ borderRadius: '50%' }}
           height={40}
           src={activeNetwork.baseAsset.image}
           alt={`${activeNetwork.baseAsset.name} asset logo`}

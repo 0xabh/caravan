@@ -7,6 +7,7 @@ import Header from '../../components/header';
 import TransferAssetButton from '../../components/transfer-asset-button';
 import { useBackgroundSelector } from '../../hooks';
 import TransactionHistory from "../../components/transaction-history";
+import AccountActivity from '../../components/account-activity';
 
 const Home = () => {
     const activeAccount = useBackgroundSelector(getActiveAccount);
@@ -37,7 +38,8 @@ const Home = () => {
                     >
                         <TransferAssetButton />
                     </Box>
-                    <Box
+                    <AccountActivity />
+                    {/* <Box
                         component="div"
                         display="flex"
                         flexDirection="column"
@@ -46,7 +48,7 @@ const Home = () => {
                         sx={{ m: 4 }}
                     >
                         <TransactionHistory />
-                    </Box>
+                    </Box> */}
                 </CardContent>
             </Card>
         </Container>

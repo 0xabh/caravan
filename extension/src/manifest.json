@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "Trampoline Example",
-  "description": "Trampoline is a chrome extension boilerplate code to showcase your own Smart Contract Wallets",
+  "name": "Caravan",
+  "description": "Caravan is a chrome extension built on top of Trampoline",
   "options_page": "options.html",
   "background": {
     "persistent": true,

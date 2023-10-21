@@ -59,6 +59,7 @@ const TransferAssetButton = () => {
               padding: '20px',
               borderRadius: '10px',
               position: 'relative',
+              width: '50%',
             }}
           >
             <IconButton onClick={handleCloseOnramper} sx={closeButtonStyle}>
@@ -109,6 +110,7 @@ const TransferAssetButton = () => {
               padding: '20px',
               borderRadius: '10px',
               position: 'relative',
+              width: '50%'
             }}
           >
             <IconButton onClick={handleCloseSwap} sx={closeButtonStyle}>

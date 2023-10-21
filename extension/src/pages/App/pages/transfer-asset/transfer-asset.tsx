@@ -1887,7 +1887,7 @@ const TransferAsset = () => {
 
 
 
-function TabPanel(props: any) {
+export function TabPanel(props: any) {
   const { children, value, index, ...other } = props;
 
   return (

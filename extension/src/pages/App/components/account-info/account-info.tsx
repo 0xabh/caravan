@@ -14,7 +14,7 @@ const AccountInfo = ({
 }) => {
   const [tooltipMessage, setTooltipMessage] = useState<string>('Copy address');
 
-  const accountInfo = useBackgroundSelector((state) =>
+  const accountInfo = useBackgroundSelector((state: any) =>
     getAccountInfo(state, address)
   );
   console.log("accountInfo", accountInfo)

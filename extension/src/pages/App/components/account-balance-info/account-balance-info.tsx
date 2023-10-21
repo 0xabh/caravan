@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 const AccountBalanceInfo = ({ address }: { address: string }) => {
   const navigate = useNavigate();
   const activeNetwork = useBackgroundSelector(getActiveNetwork);
-  const accountData: AccountData | 'loading' = useBackgroundSelector((state) =>
+  const accountData: AccountData | 'loading' = useBackgroundSelector((state: any) =>
     getAccountEVMData(state, { address, chainId: activeNetwork.chainID })
   );
   // console.log("accountData", accountData)

@@ -43,7 +43,7 @@ class SimpleAccountTrampolineAPI
     console.log('reinitialize', signer);
     this.owner = signer;
     if ((await this.provider.getCode(this.entryPointAddress)) === '0x') {
-        throw new Error(`entryPoint not deployed at ${this.entryPointAddress}`);
+      throw new Error(`entryPoint not deployed at ${this.entryPointAddress}`);
     }
     this.accountAddress = await this.getAccountAddress();
     console.log('accountAddress', this.accountAddress);
@@ -72,6 +72,9 @@ class SimpleAccountTrampolineAPI
     throw new Error('signMessage method not implemented.');
   };
 
+  private dummyPaymasterData = "0x8166e83e6c0c09a72891436341f89b450cf219bf000000000000000000000000000000000000000000000000000000006533da35000000000000000000000000000000000000000000000000000000006533d98138b01fa484c34f85784c39b3622be1e321b28f1b1ea3b1a1d6114b5cf79f578361b2976ab1fc412ad56c45e6b34bd1b1ba37487881c8414c3a2c0d472c0782a11c"
+  private usePaymaster = false;
+  private paymasterChainId = 0;
   /**
    * Called after the user is presented with the pre-transaction confirmation screen
    * The context passed to this method is the same as the one passed to the
@@ -90,12 +93,15 @@ class SimpleAccountTrampolineAPI
     const nonce = await this.getNonce();
     console.log('nonce', nonce);
     info.nonce = nonce;
-    return {
-      ...(await this.createUnsignedUserOp(info)),
-      paymasterAndData: preTransactionConfirmationContext?.paymasterAndData
-        ? preTransactionConfirmationContext?.paymasterAndData
-        : '0x',
-    };
+    const userOp = await this.createUnsignedUserOp(info);
+    if (preTransactionConfirmationContext?.paymasterAndData) {
+      userOp.paymasterAndData = this.dummyPaymasterData
+      this.usePaymaster = true;
+      this.paymasterChainId = preTransactionConfirmationContext.chainId;
+    } else {
+      userOp.paymasterAndData = '0x';
+    }
+    return userOp;
   }
 
   /**
@@ -107,7 +113,25 @@ class SimpleAccountTrampolineAPI
     userOp: UserOperationStruct,
     postTransactionConfirmationContext: any
   ): Promise<UserOperationStruct> => {
-    return this.signUserOp(userOp);
+    if (this.usePaymaster) {
+      const paymasterAndData = await fetch('http://localhost:3003/paymaster', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userOp,
+          chainId: this.paymasterChainId,
+        }),
+      });
+      const data = (await paymasterAndData.json()).receipt;
+      console.log('paymasterAndDataJson', data);
+      const newUserOp = { ...userOp, paymasterAndData: data };
+      userOp = newUserOp;
+    }
+    const signedUserOp = this.signUserOp(userOp);
+    this.usePaymaster = false;
+    return signedUserOp;
   };
 
   /**
@@ -169,16 +193,15 @@ class SimpleAccountTrampolineAPI
       const feeData = await this.provider.getFeeData();
       console.log('feeData', feeData);
       if (maxFeePerGas == null) {
-        maxFeePerGas =
-          feeData.maxFeePerGas ?? BigNumber.from('1500000000')
+        maxFeePerGas = feeData.maxFeePerGas ?? BigNumber.from('1500000000');
       }
       if (maxPriorityFeePerGas == null) {
         maxPriorityFeePerGas =
           feeData.maxPriorityFeePerGas ?? BigNumber.from('1500000000');
       }
     }
-    console.log("this.accountAddress", this.accountAddress)
-    console.log("this.getAccountAddress()", await this.getAccountAddress())
+    console.log('this.accountAddress', this.accountAddress);
+    console.log('this.getAccountAddress()', await this.getAccountAddress());
     const partialUserOp: any = {
       sender: this.accountAddress ?? (await this.getAccountAddress()),
       nonce: info.nonce ?? this.getNonce(),
@@ -209,7 +232,7 @@ class SimpleAccountTrampolineAPI
     const returnObj = {
       ...partialUserOp,
       preVerificationGas: await this.getPreVerificationGas(partialUserOp),
-      signature: '',
+      signature: '0x119942dd1f098db7bb777210d728adf4392cdc3f1104dfad072dffc9f5d560864b551c40cd76c103ed61f9fd359b5b4c72b05d0c634e1d860e7b13e1fbfd620e1c',
     };
     console.log('returnObj', returnObj);
     return returnObj;

@@ -12,17 +12,18 @@ import {
 } from '@mui/material';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import { useNavigate } from 'react-router-dom';
-import { Wallet, ethers } from 'ethers';
-import { MUMBAI_RPC, TABLELAND } from '../../../Background/constants';
 import CloseIcon from '@mui/icons-material/Close';
-
 
 const TransferAssetButton = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [openOnramper, setOpenOnramper] = useState(false);
+  const [openSwap, setOpenSwap] = useState(false);
+
+  const handleOpenOnramper = () => setOpenOnramper(true);
+  const handleCloseOnramper = () => setOpenOnramper(false);
+  const handleOpenSwap = () => setOpenSwap(true);
+  const handleCloseSwap = () => setOpenSwap(false);
 
   const modalStyle = {
     display: 'flex',
@@ -45,9 +46,13 @@ const TransferAssetButton = () => {
         sx={{ cursor: 'pointer' }}
       >
         <Avatar sx={{ bgcolor: theme.palette.primary.main }}>
-          <StoreIcon onClick={handleOpen} />
+          <StoreIcon onClick={handleOpenOnramper} />
         </Avatar>
-        <Modal open={open} onClose={handleClose} style={modalStyle}>
+        <Modal
+          open={openOnramper}
+          onClose={handleCloseOnramper}
+          style={modalStyle}
+        >
           <div
             style={{
               backgroundColor: 'white',
@@ -56,7 +61,7 @@ const TransferAssetButton = () => {
               position: 'relative',
             }}
           >
-            <IconButton onClick={handleClose} sx={closeButtonStyle}>
+            <IconButton onClick={handleCloseOnramper} sx={closeButtonStyle}>
               <CloseIcon />
             </IconButton>
             <iframe
@@ -85,17 +90,19 @@ const TransferAssetButton = () => {
         </Avatar>
         <Typography variant="button">Send</Typography>
       </Stack>
-      <Tooltip title="Coming soon">
-        <Stack
-          justifyContent="center"
-          alignItems="center"
-          spacing={'4px'}
-          sx={{ cursor: 'pointer' }}
+      <Stack
+        justifyContent="center"
+        alignItems="center"
+        spacing={'4px'}
+        sx={{ cursor: 'pointer' }}
+      >
+        <Avatar
+          sx={{ bgcolor: theme.palette.primary.main }}
+          onClick={handleOpenSwap}
         >
-          <Avatar sx={{ bgcolor: theme.palette.primary.main }} onClick={handleOpen}>
-            <SwapHorizIcon />
-          </Avatar>
-          <Modal open={open} onClose={handleClose} style={modalStyle}>
+          <SwapHorizIcon />
+        </Avatar>
+        <Modal open={openSwap} onClose={handleCloseSwap} style={modalStyle}>
           <div
             style={{
               backgroundColor: 'white',
@@ -104,14 +111,19 @@ const TransferAssetButton = () => {
               position: 'relative',
             }}
           >
-            <IconButton onClick={handleClose} sx={closeButtonStyle}>
+            <IconButton onClick={handleCloseSwap} sx={closeButtonStyle}>
               <CloseIcon />
             </IconButton>
             <div className="py-16 bg-black">
-          <iframe id='iframe-widget' src='https://tools.nfts2me.com/swap?widget=classic' style={{height: '370px', width: '100%', border: "none"}}></iframe>            </div>
+                <iframe
+                  id="iframe-widget"
+                  src="https://tools.nfts2me.com/swap?widget=classic"
+                  style={{ height: '370px', width: '100%', border: 'none' }}
+                ></iframe>{' '}
+              </div>
           </div>
         </Modal>
-          {/* <Modal open={open} onClose={handleClose} style={modalStyle}>
+        {/* <Modal open={open} onClose={handleClose} style={modalStyle}>
             <div
               style={{
                 backgroundColor: 'white',
@@ -126,10 +138,8 @@ const TransferAssetButton = () => {
               <SwapWidget />
             </div>
           </Modal> */}
-          <Typography variant="button">Swap</Typography>
-          
-        </Stack>
-      </Tooltip>
+        <Typography variant="button">Swap</Typography>
+      </Stack>
     </Stack>
   );
 };

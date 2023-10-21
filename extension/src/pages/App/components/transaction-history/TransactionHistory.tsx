@@ -66,7 +66,7 @@ export const TransactionHistory = () => {
       {data?.length === 0 && <p>No transactions yet</p>}
       {data && (
         <div>
-          {data.map((txn, index) => {
+          {data.reverse().map((txn, index) => {
             return (
               <Card key={index} sx={{margin: "4px auto"}}>
                 <CardContent>

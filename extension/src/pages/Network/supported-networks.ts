@@ -32,7 +32,7 @@ export const formattedNetwork = (
         }
     case Network.MantleTestnet:
         return {
-            rpcUrl: "https://rpc.testnet.mantle.xyz/",
+            rpcUrl: "https://mantle-testnet.rpc.thirdweb.com",
             chainId: 5001,
         }
     case Network.Sepolia:

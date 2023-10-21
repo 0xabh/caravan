@@ -35,7 +35,8 @@ import { reinitializeKeyringThunk } from '../../../Background/redux-slices/keyri
 import { getAccountData } from '../../../Background/redux-slices/account';
 import { Network } from '../../../Network';
 import { useNetworkContext } from '../../../../context/NetworkContext';
-import NativeTransfer from '../../components/transfer-asset-button/NativeTransfer';
+import NativeTransfer from './NativeTransfer';
+
 //@ts-ignore
 const spookPoolABI = [
   {

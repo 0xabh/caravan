@@ -23,6 +23,7 @@ import { selectCurrentOriginPermission } from '../../../Background/redux-slices/
 import { selectCurrentPendingSendTransactionRequest } from '../../../Background/redux-slices/selectors/transactionsSelectors';
 import { ethers } from 'ethers';
 import PrimaryButton from '../PrimaryButton';
+import { useNetworkContext } from '../../../../context/NetworkContext';
 
 const TransactionConfirmationComponent: TransactionConfirmation = ({
   userOp,
@@ -48,7 +49,6 @@ const TransactionConfirmationComponent: TransactionConfirmation = ({
     })
   );
 
-  console.log('heres');
 
   return (
     <Container>
@@ -70,7 +70,7 @@ const TransactionConfirmationComponent: TransactionConfirmation = ({
             <Typography variant="subtitle2" sx={{ mb: 2 }}>
               To:{' '}
               <Typography component="span" variant="body2">
-                {transaction.to}
+                {transaction.to.slice(0, 20)}...
               </Typography>
             </Typography>
             <Typography variant="subtitle2" sx={{ mb: 2 }}>

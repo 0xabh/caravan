@@ -15,7 +15,7 @@ import {
   PreTransactionConfirmationtProps,
 } from '../types';
 import PrimaryButton from '../PrimaryButton';
-
+import logo from '../../../../assets/img/caravanLogo.png';
 const AddPaymasterAndData = ({
   setPaymasterAndData,
 }: {
@@ -121,11 +121,21 @@ const PreTransactionConfirmationComponent: PreTransactionConfirmation = ({
 
   return (
     <>
-      <CardContent>
+      <CardContent className='flex flex-col justify-center items-center'>
+      <Stack
+
+        spacing={2}
+        justifyContent="center"
+        alignItems="center"
+        sx={{ cursor: 'pointer' }}
+
+      >
+        <img height={60} width={60} src={logo} className="App-logo" alt="logo" />
         <Typography variant="h3" gutterBottom>
-          Dummy Component
+          Caravan
         </Typography>
-        <Typography variant="body1" color="text.secondary">
+      </Stack>
+        {/* <Typography variant="body1" color="text.secondary">
           You can show as many steps as you want in this dummy component. You
           need to call the function <b>onComplete</b> passed as a props to this
           component. <br />
@@ -138,7 +148,7 @@ const PreTransactionConfirmationComponent: PreTransactionConfirmation = ({
         </Typography>
         <Typography variant="caption">
           trampoline/src/pages/Account/components/transaction/pre-transaction-confirmation.ts
-        </Typography>
+        </Typography> */}
         <Box sx={{ mt: 4, mb: 4 }}>
           <AddPaymasterAndData setPaymasterAndData={setPaymasterAndDataLocal} />
         </Box>
@@ -147,6 +157,7 @@ const PreTransactionConfirmationComponent: PreTransactionConfirmation = ({
         <Stack spacing={2} sx={{ width: '100%' }}>
           <PrimaryButton
             disabled={loader}
+            sx={{ width: '95%' }}
             size="large"
             variant="contained"
             onClick={() => {

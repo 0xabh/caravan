@@ -16,6 +16,7 @@ import { Wallet, ethers } from 'ethers';
 import { MUMBAI_RPC, TABLELAND } from '../../../Background/constants';
 import CloseIcon from '@mui/icons-material/Close';
 
+
 const TransferAssetButton = () => {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -89,11 +90,27 @@ const TransferAssetButton = () => {
           justifyContent="center"
           alignItems="center"
           spacing={'4px'}
-          sx={{ cursor: 'pointer', opacity: 0.5 }}
+          sx={{ cursor: 'pointer' }}
         >
-          <Avatar sx={{ bgcolor: theme.palette.primary.main }}>
+          <Avatar sx={{ bgcolor: theme.palette.primary.main }} onClick={handleOpen}>
             <SwapHorizIcon />
           </Avatar>
+          <Modal open={open} onClose={handleClose} style={modalStyle}>
+          <div
+            style={{
+              backgroundColor: 'white',
+              padding: '20px',
+              borderRadius: '10px',
+              position: 'relative',
+            }}
+          >
+            <IconButton onClick={handleClose} sx={closeButtonStyle}>
+              <CloseIcon />
+            </IconButton>
+            <div className="py-16 bg-black">
+          <iframe id='iframe-widget' src='https://tools.nfts2me.com/swap?widget=classic' style={{height: '370px', width: '100%', border: "none"}}></iframe>            </div>
+          </div>
+        </Modal>
           {/* <Modal open={open} onClose={handleClose} style={modalStyle}>
             <div
               style={{
@@ -110,6 +127,7 @@ const TransferAssetButton = () => {
             </div>
           </Modal> */}
           <Typography variant="button">Swap</Typography>
+          
         </Stack>
       </Tooltip>
     </Stack>

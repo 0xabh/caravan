@@ -39,7 +39,7 @@ const Header = () => {
   const handleChange = async (event: any) => {
     // console.log(event.target.value)
     const newNetwork = supportedNetworks.find(
-      (network) => network.chainID == event.target.value
+      (network: any) => network.chainID == event.target.value
     );
     if (newNetwork === activeNetwork) return;
     let _network = null
@@ -155,7 +155,7 @@ const Header = () => {
             label="Chain"
             onChange={handleChange}
           >
-            {supportedNetworks.map((network) => (
+            {supportedNetworks.map((network: any) => (
               <MenuItem key={network.chainID} value={network.chainID}>
                 {network.name}
               </MenuItem>

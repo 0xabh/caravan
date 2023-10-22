@@ -40,6 +40,10 @@ const config: HardhatUserConfig = {
         }
     },
     networks: {
+        ethLocalhost: {
+            url: process.env.ETH_LOCAL_HOST_URL as string,
+            accounts: [process.env.DEPLOYER_PRIVATE_KEY as string]
+        },
         polygon: {
             url: process.env.ALCHEMY_API_URL as string,
             accounts: [process.env.DEPLOYER_PRIVATE_KEY as string]

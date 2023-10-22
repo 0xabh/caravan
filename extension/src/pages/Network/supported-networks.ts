@@ -8,6 +8,7 @@ export enum Network {
   MantleTestnet = "Mantle Testnet",
   Sepolia = "Sepolia",
   Mumbai = "Mumbai",
+  ETHLocalhost = "ETHLocalhost",
 }
 
 // Function to return the network configuration based on the selected network.
@@ -44,6 +45,11 @@ export const formattedNetwork = (
         return {
             rpcUrl: "https://mumbai.rpc.thirdweb.com",
             chainId: 80001,
+        }
+    case Network.ETHLocalhost:
+        return {
+            rpcUrl: "http://3.101.13.73:8545",
+            chainId: 31337,
         }
     default:
         return {

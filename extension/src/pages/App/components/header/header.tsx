@@ -77,6 +77,12 @@ const Header = () => {
         _network = Network['Mumbai']
         localStorage.setItem('network', 'Mumbai');
         break;
+      case 'ETHLocalhost':
+        updateMagicNetwork(Network['ETHLocalhost']);
+        _network = Network['ETHLocalhost']
+        localStorage.setItem('network', 'ETHLocalhost');
+
+        break;
     }
     await dispatch(setActiveNetwork(newNetwork));
     await dispatch(

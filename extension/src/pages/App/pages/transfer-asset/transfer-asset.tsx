@@ -1673,7 +1673,7 @@ const TransferAsset = () => {
   const crossChainTransfer = async () => {
     const params = await generateCrossChainParams();
     console.log(params);
-    // await sendApproval(params.spokePoolAddress);
+    await sendApproval(params.spokePoolAddress);
     // const contract = new ethers.Contract(params.spokePoolAddress, spookPoolABI);
     const currentSpokePoolTime = await getCurrentTime(params.spokePoolAddress);
 

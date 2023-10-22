@@ -124,17 +124,25 @@ const DeployAccount = () => {
         method: 'eth_requestAccounts',
       });
       console.log("here")
-      await ethereum.request({
-        method: 'eth_sendTransaction',
-        params: [
-          {
-            from: activeAccount,
-            to: ethers.constants.AddressZero,
-            data: '0x',
-          },
-        ],
-      });
-        console.log("here2")
+      console.log(activeAccount, ethers.constants.AddressZero);
+      // Define transaction parameters
+      const txParams = {
+        from: activeAccount,
+        to: ethers.constants.AddressZero,
+        data: '0x',
+        gas: '0x5F5E100', // 100,000,000 in hexadecimal
+        gasPrice: '0x9502F9000', // 40,000,000,000 (40 Gwei) in hexadecimal
+        // For EIP-1559 compatible networks
+        maxFeePerGas: '0x9502F9000', 
+        maxPriorityFeePerGas: '0x9502F9000' 
+      };
+
+    // Sending Ethereum transaction
+    const txHash = await ethereum.request({
+      method: 'eth_sendTransaction',
+      params: [txParams],
+    });
+        console.log(txHash, "here2");
       setDeployLoader(false);
       alert('success');
       navigate('/');

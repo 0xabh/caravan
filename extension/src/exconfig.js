@@ -1,7 +1,7 @@
-import {EVMNetwork} from './pages/Background/types/network';
-
+"use strict";
+exports.__esModule = true;
 // eslint-disable-next-line import/no-anonymous-default-export
-export default {
+exports["default"] = {
     enablePasswordEncryption: false,
     showTransactionConfirmationScreen: true,
     factory_address: '0x510F02632863035EFaf1AD668798E097FfaE2e8b',
@@ -18,10 +18,9 @@ export default {
                 symbol: 'MATIC',
                 name: 'MATIC',
                 decimals: 18,
-                image:
-                    'https://icons.llamao.fi/icons/chains/rsz_polygon.jpg',
+                image: 'https://icons.llamao.fi/icons/chains/rsz_polygon.jpg'
             }
-        } satisfies EVMNetwork,
+        },
         {
             chainID: '10',
             family: 'EVM',
@@ -33,10 +32,9 @@ export default {
                 symbol: 'ETH',
                 name: 'ETH',
                 decimals: 18,
-                image:
-                    'https://icons.llamao.fi/icons/chains/rsz_optimism.jpg',
-            },
-        } satisfies EVMNetwork,
+                image: 'https://icons.llamao.fi/icons/chains/rsz_optimism.jpg'
+            }
+        },
         {
             chainID: '80001',
             family: 'EVM',
@@ -48,10 +46,9 @@ export default {
                 symbol: 'MATIC',
                 name: 'MATIC',
                 decimals: 18,
-                image:
-                    'https://icons.llamao.fi/icons/chains/rsz_polygon.jpg',
-            },
-        } satisfies EVMNetwork,
+                image: 'https://icons.llamao.fi/icons/chains/rsz_polygon.jpg'
+            }
+        },
         {
             chainID: '534351',
             family: 'EVM',
@@ -63,10 +60,9 @@ export default {
                 symbol: 'ETH',
                 name: 'ETH',
                 decimals: 18,
-                image:
-                    'https://chainlist.org/unknown-logo.png',
-            },
-        } satisfies EVMNetwork,
+                image: 'https://chainlist.org/unknown-logo.png'
+            }
+        },
         {
             chainID: '11155111',
             family: 'EVM',
@@ -78,10 +74,9 @@ export default {
                 symbol: 'ETH',
                 name: 'ETH',
                 decimals: 18,
-                image:
-                    'https://chainlist.org/unknown-logo.png',
-            },
-        } satisfies EVMNetwork,
+                image: 'https://chainlist.org/unknown-logo.png'
+            }
+        },
         {
             chainID: '5001',
             family: 'EVM',
@@ -93,10 +88,9 @@ export default {
                 symbol: 'MNT',
                 name: 'MNT',
                 decimals: 18,
-                image:
-                    'https://icons.llamao.fi/icons/chains/rsz_mantle.jpg',
-            },
-        } satisfies EVMNetwork,
+                image: 'https://icons.llamao.fi/icons/chains/rsz_mantle.jpg'
+            }
+        },
         {
             chainID: '31337',
             family: 'EVM',
@@ -108,9 +102,8 @@ export default {
                 symbol: 'ETH',
                 name: 'ETH',
                 decimals: 18,
-                image:
-                    'https://chainlist.org/unknown-logo.png',
-            },
-        } satisfies EVMNetwork,
-    ],
+                image: 'https://chainlist.org/unknown-logo.png'
+            }
+        },
+    ]
 };

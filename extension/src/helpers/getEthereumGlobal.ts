@@ -1,4 +1,4 @@
-import { BigNumberish } from 'ethers';
+import { BigNumberish, ethers } from 'ethers';
 
 /**
  * Gets the ethereum global in a convenient way.
@@ -39,5 +39,5 @@ export function getEthereumGlobalProvider() {
   if (typeof window.ethereum === 'undefined') {
     throw new Error('window.ethereum is missing');
   }
-  return new Web3Provider(window.ethereum);
+  return new ethers.providers.Web3Provider(window.ethereum);
 }

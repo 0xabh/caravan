@@ -74,6 +74,10 @@ const getRpcAndAddress = (chainId) => {
             rpc = 'https://rpc.ankr.com/mantle_testnet'
             address = "0x0cC3D5BfAa0eF5217Ec5f2Fa2F85d5AE2eb518E4"
             break;
+        case 31337:
+            address = "0x0cC3D5BfAa0eF5217Ec5f2Fa2F85d5AE2eb518E4"
+            rpc = "http://3.101.13.73:8545/"
+            break;
         default:
             rpc = 'https://mumbai.rpc.thirdweb.com'
             address = "0x0cC3D5BfAa0eF5217Ec5f2Fa2F85d5AE2eb518E4"
